@@ -5,13 +5,23 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
-	"os"
+	"flag"
 
 	"github.com/kr/pretty"
 )
 
 func main() {
-	resp, err := http.Get("http://pl.bab.la/slownik/polski-angielski/" + os.Args[1])
+	languagePtr := flag.Bool("en", false, "english to polish")
+	flag.Parse()
+	
+	var langUrl string 
+	langUrl = "polski-angielski"
+	
+	if *languagePtr {
+		langUrl = "angielski-polski"
+	}
+
+	resp, err := http.Get("http://pl.bab.la/slownik/"+ langUrl + "/" + flag.Args()[0])
 	ifError(err)
 
 	defer resp.Body.Close()
