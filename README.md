@@ -1,2 +1,2 @@
 # goTrans
-Poland to English translator in go using pl.bab.la
+Poland to English and English to Poland translator in go using pl.bab.la
